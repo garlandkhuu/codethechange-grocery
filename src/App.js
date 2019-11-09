@@ -30,7 +30,8 @@ const Subtitle = styled.div`
 `;
 
 const InputContainer = styled(Container)`
-  flex-direction: 'column';
+  display: flex;
+  flex-direction: row;
 `;
 
 const Body = styled(Container)`
@@ -87,21 +88,6 @@ function FreeSolo() {
           <TextField {...params} label="freeSolo" margin="normal" variant="outlined" fullWidth />
         )}
       />
-      {/* <Autocomplete
-        freeSolo
-        disableClearable
-        options={ITEMS.map(option => option.title)}
-        renderInput={params => (
-          <TextField
-            {...params}
-            label="Search input"
-            margin="normal"
-            variant="outlined"
-            fullWidth
-            InputProps={{ ...params.InputProps, type: 'search' }}
-          />
-        )}
-      /> */}
     </div>
   );
 }
