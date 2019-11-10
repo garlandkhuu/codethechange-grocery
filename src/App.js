@@ -8,6 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import styled from "styled-components";
 
@@ -55,7 +56,18 @@ const ITEMS = [
   {category_name: 'Cashew Cheese'},
   {category_name: 'Goat Cheese'}
 ]
+const PRODUCT = [
+  {product_name: 'Oat Milk example', category_id: '123', score:'1'},
+  {product_name: 'Oat Milk example 2', category_id: '123',score:'2'},
+  {product_name: 'Oat Milk example 3', category_id: '123',score:'3'},
+  {product_name: 'Cheddar cheese 1', category_id: '555',score:'2'},
+  {product_name: 'Cheddar cheese 2', category_id: '555',score:'3'},
+  {product_name: 'Cheddar cheese 3', category_id: '555',score:'1'}
+]
 
+function addToList(e, v) {
+  console.log(v)
+}
 
 const App = () => {
   return (
@@ -67,11 +79,14 @@ const App = () => {
       </Header>
       <Body>
       <InputContainer>
-        <FreeSolo defaultValue='Milk'></FreeSolo> 
-        <Button variant="contained" >Default</Button>
+        <FreeSolo></FreeSolo>
+        <Button type="submit" variant="contained">Add to List</Button>
         </InputContainer>
         <List>
-          <ListItem>3.5% Whole Milk</ListItem><ListItemIcon></ListItemIcon>
+          <ListItem><Checkbox
+  value="checkedA"
+  inputProps={{ 'aria-label': 'Checkbox A' }}
+/>3.5% Whole Milk</ListItem><ListItemIcon></ListItemIcon>
         </List>
       </Body>
     </React.Fragment>
@@ -82,6 +97,8 @@ function FreeSolo() {
   return (
     <div style={{ width: 300 }}>
       <Autocomplete
+        defaultValue='Milk'
+        onChange={addToList}
         freeSolo
         options={ITEMS.map(option => option.category_name)}
         renderInput={params => (
