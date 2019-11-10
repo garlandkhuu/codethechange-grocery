@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import Modal from '@material-ui/core/Modal';
 import styled from "styled-components";
 
 const Header = styled.div`
@@ -33,6 +33,10 @@ const Subtitle = styled.div`
 const InputContainer = styled(Container)`
   display: flex;
   flex-direction: row;
+`;
+const ProductList = styled(Container)`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Body = styled(Container)`
@@ -58,9 +62,9 @@ const CATEGORIES = [
   {category_name: 'Cheddar Cheese', category_id: '15'}
 ]
 const PRODUCTS = [
-  {product_name: 'Oat Milk example', category_id: '6', score:'1'},
-  {product_name: 'Oat Milk example 2', category_id: '6',score:'2'},
-  {product_name: 'Oat Milk example 3', category_id: '6',score:'3'},
+  {product_name: 'Dairyland Oat Milk', category_id: '6', score:'1'},
+  {product_name: 'Bob\'s Organic Oat Milk', category_id: '6',score:'2'},
+  {product_name: 'Prime Minister\'s Choice Oat Milk', category_id: '6',score:'3'},
   {product_name: 'Cheddar cheese 1', category_id: '15',score:'2'},
   {product_name: 'Cheddar cheese 2', category_id: '15',score:'3'},
   {product_name: 'Cheddar cheese 3', category_id: '15',score:'1'}
@@ -68,24 +72,48 @@ const PRODUCTS = [
 
 
 const App = () => {
-const [currentInput, setCurrentInput] = useState("")
+  const [currentInput, setCurrentInput] = useState("");
+  const [productList, setProductList] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [shoppingList, setShoppingList] = useState([]);
 
-  function addToList(e, v) {
+  function selectCategory(e, v) {
     console.log(v)
     setCurrentInput(v)
   }
 
-  function getProductList() {
-    var item = CATEGORIES.filter(item=> item.category_name===currentInput)[0]
-    console.log(item)
-    var products= PRODUCTS.filter(product=> product.category_id==item.category_id)
-    console.log(products)
-  
+  function addToList(v) {
+    var list = [...shoppingList, v]
+    setShoppingList(list);
+    setModalOpen(false);
   }
-  
-console.log(currentInput)
+
+  function getProductList() {
+    var item = CATEGORIES.filter(item=> item.category_name===currentInput)[0];
+     var products = PRODUCTS.filter(product => product.category_id == item.category_id);
+     setProductList(products);
+     setModalOpen(true);
+  }
+
+  function ProductListing() {
+    let table = [];
+    for(let i = 0; i < productList.length; i++){
+      table.push(<Button onClick={() => addToList(productList[i])}><div>{productList[i].product_name}</div><div>  | Score: {productList[i].score}</div></Button>);
+    }
+    return (modalOpen ? table : "");
+  }
+
+  function ShoppingListing() {
+    let table = [];
+    for(let i = 0; i < shoppingList.length; i++){
+      table.push(<ListItem key={i}>{shoppingList[i].product_name}</ListItem>);
+    }
+    return table;
+  }
+
   return (
     <React.Fragment>
+    {console.log(shoppingList)}
       <CssBaseline />
       <Header>
         <Title>GreenGrocer</Title>
@@ -93,14 +121,15 @@ console.log(currentInput)
       </Header>
       <Body>
       <InputContainer>
-        <FreeSolo updateFunction={addToList}></FreeSolo>
-        <Button type="submit" variant="contained" onClick={getProductList}>Add to List</Button>
+        <FreeSolo updateFunction={selectCategory}></FreeSolo>
+        <Button type="submit" variant="contained" onClick={getProductList}>Search for Products</Button>
         </InputContainer>
+        <ProductList>
+          {ProductListing()}
+        </ProductList>
+        <div>Shopping List:</div>
         <List>
-          <ListItem><Checkbox
-  value="checkedA"
-  inputProps={{ 'aria-label': 'Checkbox A' }}
-/>3.5% Whole Milk</ListItem><ListItemIcon></ListItemIcon>
+          {ShoppingListing()}
         </List>
       </Body>
     </React.Fragment>
@@ -122,6 +151,8 @@ function FreeSolo(props) {
     </div>
   );
 }
+
+
 
 // function List() {
 //   return (
