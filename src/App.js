@@ -40,7 +40,7 @@ const Body = styled(Container)`
 `;
 
 
-const ITEMS = [
+const CATEGORIES = [
   {category_name: '2% Milk', category_id: '1'},
   {category_name: '3.5% Milk', category_id: '2'},
   {category_name: 'Skim Milk', category_id: '3'},
@@ -55,9 +55,9 @@ const ITEMS = [
   {category_name: 'Oat Cheese', category_id: '12'},
   {category_name: 'Cashew Cheese', category_id: '13'},
   {category_name: 'Goat Cheese', category_id: '14'},
-  {category_name: 'Chedday Cheese', category_id: '15'}
+  {category_name: 'Cheddar Cheese', category_id: '15'}
 ]
-const PRODUCT = [
+const PRODUCTS = [
   {product_name: 'Oat Milk example', category_id: '6', score:'1'},
   {product_name: 'Oat Milk example 2', category_id: '6',score:'2'},
   {product_name: 'Oat Milk example 3', category_id: '6',score:'3'},
@@ -76,8 +76,11 @@ const [currentInput, setCurrentInput] = useState("")
   }
 
   function getProductList() {
-    var item = ITEMS.filter(item=> item.category_name===currentInput)
+    var item = CATEGORIES.filter(item=> item.category_name===currentInput)[0]
     console.log(item)
+    var products= PRODUCTS.filter(product=> product.category_id==item.category_id)
+    console.log(products)
+  
   }
   
 console.log(currentInput)
@@ -111,7 +114,7 @@ function FreeSolo(props) {
         defaultValue='Milk'
         onChange={props.updateFunction}
         freeSolo
-        options={ITEMS.map(option => option.category_name)}
+        options={CATEGORIES.map(option => option.category_name)}
         renderInput={params => (
           <TextField {...params} label="freeSolo" margin="normal" variant="outlined" fullWidth />
         )}
