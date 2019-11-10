@@ -65,9 +65,9 @@ const PRODUCTS = [
   {product_name: 'Dairyland Oat Milk', category_id: '6', score:'1'},
   {product_name: 'Bob\'s Organic Oat Milk', category_id: '6',score:'2'},
   {product_name: 'Prime Minister\'s Choice Oat Milk', category_id: '6',score:'3'},
-  {product_name: 'Cheddar cheese 1', category_id: '15',score:'2'},
-  {product_name: 'Cheddar cheese 2', category_id: '15',score:'3'},
-  {product_name: 'Cheddar cheese 3', category_id: '15',score:'1'}
+  {product_name: 'White Diamond Cheddar Cheese', category_id: '15',score:'2'},
+  {product_name: 'Cracker Barrel Cheddar Cheese', category_id: '15',score:'3'},
+  {product_name: 'Prime Minister\'s Cheddar Cheese', category_id: '15',score:'1'}
 ]
 
 
