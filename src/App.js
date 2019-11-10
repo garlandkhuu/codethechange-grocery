@@ -1,68 +1,137 @@
-import React from "react";
+import React, {useState} from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
+import Input from '@material-ui/core/Input';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+
 import styled from "styled-components";
 
 const Header = styled.div`
-  background-color: #00bfd8;
-  padding: 120px 0px;
+  background-color: #6fbf83;
+  padding: 10px 0px;
   text-align: center;
   font-family: "Raleway";
   font-weight: bold;
   color: white;
-  border-bottom: #ff6363 20px solid;
+  border-bottom: #349c85 20px solid;
 `;
 
-
-
 const Title = styled.div`
-  font-size: 60px;
+  font-size: 20px;
 `;
 
 const Subtitle = styled.div`
   font-size: 30px;
 `;
 
+const InputContainer = styled(Container)`
+  display: flex;
+  flex-direction: row;
+`;
+
 const Body = styled(Container)`
   padding: 20px 0px;
-`
+`;
+
+
+const CATEGORIES = [
+  {category_name: '2% Milk', category_id: '1'},
+  {category_name: '3.5% Milk', category_id: '2'},
+  {category_name: 'Skim Milk', category_id: '3'},
+  {category_name: 'Soy Milk', category_id: '4'},
+  {category_name: 'Almond Milk', category_id: '5'},
+  {category_name: 'Oat Milk', category_id: '6'},
+  {category_name: 'Cashew Milk', category_id: '7'},
+  {category_name: '2% Cheese', category_id: '8'},
+  {category_name: 'Skim Cheese', category_id: '9'},
+  {category_name: 'Soy Cheese', category_id: '10'},
+  {category_name: 'Almond Cheese', category_id: '11'},
+  {category_name: 'Oat Cheese', category_id: '12'},
+  {category_name: 'Cashew Cheese', category_id: '13'},
+  {category_name: 'Goat Cheese', category_id: '14'},
+  {category_name: 'Cheddar Cheese', category_id: '15'}
+]
+const PRODUCTS = [
+  {product_name: 'Oat Milk example', category_id: '6', score:'1'},
+  {product_name: 'Oat Milk example 2', category_id: '6',score:'2'},
+  {product_name: 'Oat Milk example 3', category_id: '6',score:'3'},
+  {product_name: 'Cheddar cheese 1', category_id: '15',score:'2'},
+  {product_name: 'Cheddar cheese 2', category_id: '15',score:'3'},
+  {product_name: 'Cheddar cheese 3', category_id: '15',score:'1'}
+]
+
 
 const App = () => {
+const [currentInput, setCurrentInput] = useState("")
+
+  function addToList(e, v) {
+    console.log(v)
+    setCurrentInput(v)
+  }
+
+  function getProductList() {
+    var item = CATEGORIES.filter(item=> item.category_name===currentInput)[0]
+    console.log(item)
+    var products= PRODUCTS.filter(product=> product.category_id==item.category_id)
+    console.log(products)
+  
+  }
+  
+console.log(currentInput)
   return (
     <React.Fragment>
       <CssBaseline />
       <Header>
-        <Title>Code the Change YYC</Title>
-        <Subtitle>Kickoff 2019</Subtitle>
+        <Title>GreenGrocer</Title>
+        {/* <Subtitle>Kickoff 2019</Subtitle> */}
       </Header>
       <Body>
-        <p>
-          Welcome to Code the Change Kickoff 2019!
-        </p>
-        <p>
-          This boilerplate site was bootstrapped with Create React App.
-        </p>
-        <p>
-          DevPost link:
-        </p>
-        <p>
-          Slack Channel:
-        </p>
+      <InputContainer>
+        <FreeSolo updateFunction={addToList}></FreeSolo>
+        <Button type="submit" variant="contained" onClick={getProductList}>Add to List</Button>
+        </InputContainer>
+        <List>
+          <ListItem><Checkbox
+  value="checkedA"
+  inputProps={{ 'aria-label': 'Checkbox A' }}
+/>3.5% Whole Milk</ListItem><ListItemIcon></ListItemIcon>
+        </List>
       </Body>
     </React.Fragment>
   );
 };
 
-function List() {
+function FreeSolo(props) {
   return (
-    <div>
-      <p>Hello! Here's a to-do:</p>
-      <ul>
-        <li>Handle back-end REST API</li>
-        <li>Create simple template</li>
-      </ul>
+    <div style={{ width: 300 }}>
+      <Autocomplete
+        defaultValue='Milk'
+        onChange={props.updateFunction}
+        freeSolo
+        options={CATEGORIES.map(option => option.category_name)}
+        renderInput={params => (
+          <TextField {...params} label="new item" margin="normal" variant="outlined" fullWidth />
+        )}
+      />
     </div>
   );
 }
+
+// function List() {
+//   return (
+//     <div>
+//       <ul>
+//         <li>Handle back-end REST API</li>
+//         <li>Create simple template</li>
+//       </ul>
+//     </div>
+//   );
+// }
 
 export default App;
