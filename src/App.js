@@ -41,28 +41,29 @@ const Body = styled(Container)`
 
 
 const ITEMS = [
-  {category_name: '2% Milk'},
-  {category_name: '3.5% Milk'},
-  {category_name: 'Skim Milk'},
-  {category_name: 'Soy Milk'},
-  {category_name: 'Almond Milk'},
-  {category_name: 'Oat Milk', category_id: '123'},
-  {category_name: 'Cashew Milk'},
-  {category_name: '2% Cheese'},
-  {category_name: 'Skim Cheese'},
-  {category_name: 'Soy Cheese'},
-  {category_name: 'Almond Cheese'},
-  {category_name: 'Oat Cheese'},
-  {category_name: 'Cashew Cheese'},
-  {category_name: 'Goat Cheese'}
+  {category_name: '2% Milk', category_id: '1'},
+  {category_name: '3.5% Milk', category_id: '2'},
+  {category_name: 'Skim Milk', category_id: '3'},
+  {category_name: 'Soy Milk', category_id: '4'},
+  {category_name: 'Almond Milk', category_id: '5'},
+  {category_name: 'Oat Milk', category_id: '6'},
+  {category_name: 'Cashew Milk', category_id: '7'},
+  {category_name: '2% Cheese', category_id: '8'},
+  {category_name: 'Skim Cheese', category_id: '9'},
+  {category_name: 'Soy Cheese', category_id: '10'},
+  {category_name: 'Almond Cheese', category_id: '11'},
+  {category_name: 'Oat Cheese', category_id: '12'},
+  {category_name: 'Cashew Cheese', category_id: '13'},
+  {category_name: 'Goat Cheese', category_id: '14'},
+  {category_name: 'Chedday Cheese', category_id: '15'}
 ]
 const PRODUCT = [
-  {product_name: 'Oat Milk example', category_id: '123', score:'1'},
-  {product_name: 'Oat Milk example 2', category_id: '123',score:'2'},
-  {product_name: 'Oat Milk example 3', category_id: '123',score:'3'},
-  {product_name: 'Cheddar cheese 1', category_id: '555',score:'2'},
-  {product_name: 'Cheddar cheese 2', category_id: '555',score:'3'},
-  {product_name: 'Cheddar cheese 3', category_id: '555',score:'1'}
+  {product_name: 'Oat Milk example', category_id: '6', score:'1'},
+  {product_name: 'Oat Milk example 2', category_id: '6',score:'2'},
+  {product_name: 'Oat Milk example 3', category_id: '6',score:'3'},
+  {product_name: 'Cheddar cheese 1', category_id: '15',score:'2'},
+  {product_name: 'Cheddar cheese 2', category_id: '15',score:'3'},
+  {product_name: 'Cheddar cheese 3', category_id: '15',score:'1'}
 ]
 
 
