@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Input from '@material-ui/core/Input';
@@ -46,7 +46,7 @@ const ITEMS = [
   {category_name: 'Skim Milk'},
   {category_name: 'Soy Milk'},
   {category_name: 'Almond Milk'},
-  {category_name: 'Oat Milk'},
+  {category_name: 'Oat Milk', category_id: '123'},
   {category_name: 'Cashew Milk'},
   {category_name: '2% Cheese'},
   {category_name: 'Skim Cheese'},
@@ -65,11 +65,21 @@ const PRODUCT = [
   {product_name: 'Cheddar cheese 3', category_id: '555',score:'1'}
 ]
 
-function addToList(e, v) {
-  console.log(v)
-}
 
 const App = () => {
+const [currentInput, setCurrentInput] = useState("")
+
+  function addToList(e, v) {
+    console.log(v)
+    setCurrentInput(v)
+  }
+
+  function getProductList() {
+    var item = ITEMS.filter(item=> item.category_name===currentInput)
+    console.log(item)
+  }
+  
+console.log(currentInput)
   return (
     <React.Fragment>
       <CssBaseline />
@@ -79,8 +89,8 @@ const App = () => {
       </Header>
       <Body>
       <InputContainer>
-        <FreeSolo></FreeSolo>
-        <Button type="submit" variant="contained">Add to List</Button>
+        <FreeSolo updateFunction={addToList}></FreeSolo>
+        <Button type="submit" variant="contained" onClick={getProductList}>Add to List</Button>
         </InputContainer>
         <List>
           <ListItem><Checkbox
@@ -93,12 +103,12 @@ const App = () => {
   );
 };
 
-function FreeSolo() {
+function FreeSolo(props) {
   return (
     <div style={{ width: 300 }}>
       <Autocomplete
         defaultValue='Milk'
-        onChange={addToList}
+        onChange={props.updateFunction}
         freeSolo
         options={ITEMS.map(option => option.category_name)}
         renderInput={params => (
