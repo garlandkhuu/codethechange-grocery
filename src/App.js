@@ -116,7 +116,7 @@ function FreeSolo(props) {
         freeSolo
         options={CATEGORIES.map(option => option.category_name)}
         renderInput={params => (
-          <TextField {...params} label="freeSolo" margin="normal" variant="outlined" fullWidth />
+          <TextField {...params} label="new item" margin="normal" variant="outlined" fullWidth />
         )}
       />
     </div>
